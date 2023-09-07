@@ -20,3 +20,21 @@ WHERE CustomerID = 1;
 DELETE FROM Customers WHERE CustomerName IS NULL;
 DELETE FROM Customers;
 SELECT * FROM Customers WHERE Country = 'Germany' LIMIT 5;  
+SELECT MIN(price) AS smallestPrice FROM Products;
+SELECT MAX(Price) AS LargestPrice FROM Products;
+SELECT AVG(Price) FROM Products;
+SELECT SUM(Quantity) FROM OrderDetail;
+SELECT * FROM Customers WHERE CustomerName LIKE '%a';
+SELECT * FROM Customers WHERE Country IN ('Germany','France');
+SELECT * FROM Customers WHERE Country IN (SELECT Country FROM Suppliers);
+SELECT * FROM Products WHERE Price BETWEEN 10 AND 20;
+SELECT * FROM Products WHERE Price NOT BETWEEN 10 AND 20;
+SELECT * FROM Products WHERE Price BETWEEN 10 AND 20 AND CategoryID NOT IN(1,2,3);
+SELECT * FROM Products WHERE ProductName BETWEEN 'Tiger' AND 'Mozzarella'
+ORDER By ProductName;
+SELECT CustomerName AS Customers, ContactName AS "Contact Person" FROM Customers;
+SELECT Orders.OrderID, Customers.CustomerName FROM Orders
+INNER JOIN Customers ON Orders.CustomerID = Customers.CustomerID;
+SELECT Orders.OrderID, Customers.CustomerName, Shippers.ShipperName
+FROM((Orders INNER JOIN Customers ON Orders.CustomerID = Customers.CustomerID)
+INNER JOIN Shippers ON Orders.shipperID = Shipper.shipperID);
