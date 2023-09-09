@@ -38,3 +38,23 @@ INNER JOIN Customers ON Orders.CustomerID = Customers.CustomerID;
 SELECT Orders.OrderID, Customers.CustomerName, Shippers.ShipperName
 FROM((Orders INNER JOIN Customers ON Orders.CustomerID = Customers.CustomerID)
 INNER JOIN Shippers ON Orders.shipperID = Shipper.shipperID);
+SELECT Customers.CustomerName, Orders.OrderID FROM Customers
+LEFT JOIN Orders On Customers.CustomerID = Orders.CustomerID
+ORDER BY Customers.CustomerName;
+SELECT Orders.OrderID, Employess.LastName, Employess.FirstName
+FROM Orders RIGHT JOIN Employess ON Orders.EmployessID = Employess.EmployessID
+ORDER BY Orders.OrderID;
+SELECT Customers.CustomerName,Ordes.OrderID FROM Customers CROSS JOIN Orders;
+SELECT City FROM Customers UNION SELECT City FROM Suppliers 
+ORDER BY City;
+SELECT City, Country FROM Customers WHERE Country = 'Germany'
+UNION
+SELECT City, Country FROM Suppliers
+WHERE Country = 'Germany' ORDER By City;
+SELECT COUNT(CustomerID), Country FROM Customers GROUP BY County;
+SELECT COUNT(CustomerID), Country FROM Customers GROUP BY Country 
+ORDER BY COUNT(CustomerID) DESC;
+SELECT COUNT(CustomerID),Country FROM Customers GROUP BY Country 
+HAVING COUNT(CustomerID) > 5;
+SELECT SupplierName FROM Supplier 
+WHERE EXISTS (SELECT ProductName FROM Products WHERE Products.Supplier = Suppliers.supplierID AND Price < 20);
