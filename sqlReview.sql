@@ -58,3 +58,18 @@ SELECT COUNT(CustomerID),Country FROM Customers GROUP BY Country
 HAVING COUNT(CustomerID) > 5;
 SELECT SupplierName FROM Supplier 
 WHERE EXISTS (SELECT ProductName FROM Products WHERE Products.Supplier = Suppliers.supplierID AND Price < 20);
+SELECT ProductName FROM Products WHERE ProductID = ANY (SELECT ProductID FROM OrderDetails
+WHERE Quantity = 10);
+INSERT INTO Customers(CustomerName, ContactName,Country)
+SELECT SupplierName, Contact, Country FROM Suppliers;
+SELECT OrderID,Quantity,
+CASE 
+    WHEN Quantity > 30 THEN 'The quantity is greater than 30'
+    WHEN Quantity = 30 THEN 'The quantity is 30'
+    ELSE 'The quantity is under 30'
+END AS quantityText
+FROM OrderDetails;
+SELECT ProductName, UnitPrice * (UnitesInStock + IFNULL(UnitsOnOrder,0))
+FROM Products;
+SELECT ProductName, UnitPrice *(UnitesInStock + COALESCE(UnitsOnOrder,0))
+FROM Products;
