@@ -73,3 +73,28 @@ SELECT ProductName, UnitPrice * (UnitesInStock + IFNULL(UnitsOnOrder,0))
 FROM Products;
 SELECT ProductName, UnitPrice *(UnitesInStock + COALESCE(UnitsOnOrder,0))
 FROM Products;
+CREATE DATABASE testDB;
+DROP DATABASE testDB;
+CREATE TABLE Person (PersonID int, 
+                     LastName varchar(255),
+                     FirstName varchar(255),
+                     Address varchar(255),
+                     City varchar(255));
+DROP TABLE Shipers;
+ALTER TABLE Customers ADD Email varchar(255);
+ALTER TABLE Customers DROP COLUMN Email;
+CREATE TABLE Person (ID int NOT NULL,
+                    LastName varchar(255) NOT NULL,
+                    FirstName varchar(255) NOT NULL,
+                    Age int
+                    );
+CREATE TABLE Persons (ID int NOT NULL,
+                     LastName varchar(255) NOT NULL,
+                     FirstName varchar(255),
+                     Age int,
+                     UNIQUE(ID));
+CREATE TABLE Persons (ID int NOT NULL,
+                     LastName varchar(255) NOT NULL,
+                     FirstName varchar(255),
+                     Age int,
+                     CONSTRAINT UC_Person UNIQUE(ID,LastName));
