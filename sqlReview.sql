@@ -98,3 +98,31 @@ CREATE TABLE Persons (ID int NOT NULL,
                      FirstName varchar(255),
                      Age int,
                      CONSTRAINT UC_Person UNIQUE(ID,LastName));
+CREATE TABLE Person (
+                    ID int NOT NULL,
+                    LastName varchar(255) NOT NULL,
+                    FirstName varchar(255),
+                    Age int,
+                    PRIMARY KEY(ID));
+ALTER TABLE Person ADD CONSTRAINT PK_Person PRIMARY KEY (ID, LastName);
+CREATE TABLE Order (
+                    OrderID int NOT NULL,
+                    OrderNumber int NOT NULL,
+                    PersonID int,
+                    PRIMARY KEY (OrderID),
+                    FOREIGN KEY (Person) REFERENCES Person(PersonID)); 
+CREAT TABLE Person (
+                    ID int NOT NULL,
+                    LastName varchar(255) NOT NULL,
+                    FirstName varchar(255),
+                    CONSTRAINT CHK_Person CHECK (Age >= 18 AND City='Beijing'));
+ALTER TABLE Person DROP CHECK CHK_Person;
+
+CREAT VIEW [Products Above Average Price] AS
+SELECT ProductName, Price FROM Products 
+WHERE Price > (SELECT AVG(Price) FROM Products);
+
+DROP VIEW [Products Above Average Price];
+
+
+
